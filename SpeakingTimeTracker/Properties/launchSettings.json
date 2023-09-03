@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SpeakingTimeTracker": {
+      "commandName": "Project",
+      "commandLineArgs": "<your vtt file>"
+    }
+  }
+}
