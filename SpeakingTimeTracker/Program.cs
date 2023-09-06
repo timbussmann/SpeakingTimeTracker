@@ -12,7 +12,8 @@
 
             List<TranscriptSegment> segments = await ZoomTranscriptParser.ParseTranscript(File.ReadLinesAsync(args[0]));
 
-            Console.WriteLine($"Total speaking time: {segments.Aggregate(TimeSpan.Zero, (totalDuration, segment) => totalDuration + segment.Duration)}");
+            var totalSpeakingTime = segments.Aggregate(TimeSpan.Zero, (totalDuration, segment) => totalDuration + segment.Duration);
+            Console.WriteLine($"Total speaking time: {totalSpeakingTime}");
             var speakingTimePerSpeaker = segments
                 .GroupBy(s => s.SpeakerName)
                 .Select(group => (
@@ -21,7 +22,7 @@
                 .OrderByDescending(tuple => tuple.duration);
             foreach (var speaker in speakingTimePerSpeaker)
             {
-                Console.WriteLine($"{speaker.speaker ?? "<unknown>"}: {speaker.duration}");
+                Console.WriteLine($"{speaker.speaker ?? "<unknown>"}: {speaker.duration:g} [{(speaker.duration/totalSpeakingTime)*100:##}%]");
             }
 
         }
