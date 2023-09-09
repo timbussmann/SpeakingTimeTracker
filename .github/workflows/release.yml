@@ -15,7 +15,7 @@ jobs:
           dotnet-version: '7.x.x'
       - name: Build Windows
         run: dotnet publish --configuration Release -r win-x64 --self-contained
-      - run: pdw
+      - run: pwd
       - uses: actions/upload-artifact@v3
         with:
           name: Windows x64
