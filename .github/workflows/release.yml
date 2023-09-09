@@ -1,0 +1,33 @@
+name: release
+on:
+  workflow_dispatch:
+env:
+  DOTNET_NOLOGO: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.x.x'
+      - name: Build Windows
+        run: dotnet publish src --configuration Release -r win-x64 --self-contained
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Windows x64
+          path: /*/bin/release/*/win-x64/publish/*
+      - name: Build Linux
+        run: dotnet publish src --configuration Release -r linux-x64 --self-contained
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Linux x64
+          path: /*/bin/release/*/linux-x64/publish/*
+      - name: Build macOS
+        run: dotnet publish src --configuration Release -r osx-arm64 --self-contained
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Linux x64
+          path: /*/bin/release/*/osx-arm64/publish/*
