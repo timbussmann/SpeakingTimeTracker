@@ -18,16 +18,16 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: Windows x64
-          path: /*/bin/release/*/win-x64/publish/*
+          path: ./*/bin/release/*/win-x64/publish/*
       - name: Build Linux
         run: dotnet publish --configuration Release -r linux-x64 --self-contained
       - uses: actions/upload-artifact@v3
         with:
           name: Linux x64
-          path: /*/bin/release/*/linux-x64/publish/*
+          path: ./*/bin/release/*/linux-x64/publish/*
       - name: Build macOS
         run: dotnet publish --configuration Release -r osx-arm64 --self-contained
       - uses: actions/upload-artifact@v3
         with:
           name: Linux x64
-          path: /*/bin/release/*/osx-arm64/publish/*
+          path: ./*/bin/release/*/osx-arm64/publish/*
