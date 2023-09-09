@@ -4,7 +4,7 @@ on:
 env:
   DOTNET_NOLOGO: true
 jobs:
-  build:
+  build-artifacts:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -14,20 +14,21 @@ jobs:
         with:
           dotnet-version: '7.x.x'
       - name: Build Windows
-        run: dotnet publish --configuration Release -r win-x64 --self-contained
+        run: dotnet publish --configuration Release -r win-x64 --self-contained false
+      - run: pwd
       - uses: actions/upload-artifact@v3
         with:
           name: Windows x64
-          path: /*/bin/release/*/win-x64/publish/*
+          path: ./SpeakingTimeTracker/bin/Release/*/win-x64/publish/*
       - name: Build Linux
-        run: dotnet publish --configuration Release -r linux-x64 --self-contained
+        run: dotnet publish --configuration Release -r linux-x64 --self-contained false
       - uses: actions/upload-artifact@v3
         with:
           name: Linux x64
-          path: /*/bin/release/*/linux-x64/publish/*
+          path: ./SpeakingTimeTracker/bin/Release/*/linux-x64/publish/*
       - name: Build macOS
-        run: dotnet publish --configuration Release -r osx-arm64 --self-contained
+        run: dotnet publish --configuration Release -r osx-arm64 --self-contained false
       - uses: actions/upload-artifact@v3
         with:
-          name: Linux x64
-          path: /*/bin/release/*/osx-arm64/publish/*
+          name: OSX arm64
+          path: ./SpeakingTimeTracker/bin/Release/*/osx-arm64/publish/*
