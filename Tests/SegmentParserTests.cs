@@ -17,6 +17,6 @@ public class SegmentParserTests
 
         var result = await ZoomTranscriptParser.ParseSegment(segment.Split(Environment.NewLine).ToAsyncEnumerable().GetAsyncEnumerator());
 
-        Assert.AreEqual(speaker, result.SpeakerName);
+        Assert.That(result.SpeakerName, Is.EqualTo(speaker));
     }
 }

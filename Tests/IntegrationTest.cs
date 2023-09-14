@@ -11,6 +11,6 @@ public class IntegrationTest
 
         List<TranscriptSegment> segments = await ZoomTranscriptParser.ParseTranscript(File.ReadLinesAsync(filePath));
 
-        Assert.AreEqual(13, segments.Count);
+        Assert.That(segments.Count, Is.EqualTo(13));
     }
 }
